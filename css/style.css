@@ -1,0 +1,102 @@
+:root {
+    --bg-color: #080D1A;
+    --bg-search: #0B1220;
+
+    --h1-color: #F5C842;
+    --p-color-1: #A89878;
+    --p-color-2: #4A4030;
+
+    --line-color: #795b17;
+    --bg-button: #D4A12A;
+
+    --primary-font: "Cinzel", serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding-left: 400px;
+    width: 100%;
+    height: 80px;
+    border-bottom: 0.1px solid var(--line-color);
+}
+
+header h1 {
+    color: var(--h1-color);
+    font-family: var(--primary-font);
+    font-size: 25px;
+}
+
+.hero-content {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+main h1 {
+    color: var(--h1-color);
+    font-family: var(--primary-font);
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.description {
+    color: var(--p-color-1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 17px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--bg-search);
+    border: 1px solid var(--p-color-2);
+    border-radius: 999px;
+    padding: 6px 8px 6px 20px;
+    gap: 10px;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.search-box:focus-within {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212, 161, 42, 0.12);
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+
+}
+
+.search-input::placeholder {
+    color: var(--p-color-2);
+}
+
+.btn-search {
+    background: var(--bg-button);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 24px;
+    font-family: var(--primary-font);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-search:hover {
+    background: #dfb126;
+}
