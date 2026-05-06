@@ -78,6 +78,7 @@ main h1 {
     outline: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
+    color: var(--p-color-1);
 
 }
 
@@ -99,4 +100,39 @@ main h1 {
 
 .btn-search:hover {
     background: #dfb126;
+}
+
+.dados p{
+    display: flex;
+    flex-direction: column;
+    color: var(--p-color-2);
+}
+
+.dados a {
+    color: var(--p-color-2);
+    font-family: var(--primary-font);
+}
+
+.dados a:hover {
+    color: var(--p-color-1);
+    transition: 0.3s;
+}
+
+.btn-random {
+    background: var(--bg-search);
+    border: 1px solid var(--line-color);
+    color: var(--p-color-1);
+    border-radius: 999px;
+    padding: 12px 24px;
+    font-family: var(--primary-font);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.container-btn-random {
+    display: flex;
+    max-width: 600px;
+    justify-content: center;
 }
