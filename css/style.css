@@ -30,6 +30,7 @@ header h1 {
 .hero-content {
     max-width: 640px;
     margin: 0 auto;
+    margin-top: 100px;
 }
 
 main h1 {
@@ -118,6 +119,12 @@ main h1 {
     transition: 0.3s;
 }
 
+.container-btn-random {
+    display: flex;
+    max-width: 600px;
+    justify-content: center;
+}
+
 .btn-random {
     background: var(--bg-search);
     border: 1px solid var(--line-color);
@@ -131,8 +138,8 @@ main h1 {
     transition: background 0.2s;
 }
 
-.container-btn-random {
-    display: flex;
-    max-width: 600px;
-    justify-content: center;
+.btn-random:hover {
+    color: var(--bg-button);
+    transform: translateY(-1px);
+    transition: 0.2s;
 }
