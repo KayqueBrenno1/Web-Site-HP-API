@@ -151,3 +151,77 @@ main h1 {
     transform: translateY(-1px);
     transition: 0.2s;
 }
+
+.character-card {
+    width: 410px;
+    background: rgba(5, 10, 25, 0.95);
+    border: 1px solid #8B6B20;
+    padding: 40px 30px 60px;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.5),
+        0 0 8px rgba(212, 161, 42, 0.15);
+}
+
+.character-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #D4A12A;
+    margin-bottom: 30px;
+}
+
+.character-card h2 {
+    color: var(--h1-color);
+    font-family: var(--primary-font);
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.card-info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 12px;
+    margin-bottom: 28px;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.label {
+    display: block;
+    color: var(--h1-color);
+    font-family: var(--primary-font);
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.info-item p,
+.wand-section p {
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.extra-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 10px;
+}
+
+.extra-info .info-item,
+.extra-info .wand-section {
+    text-align: center;
+}
