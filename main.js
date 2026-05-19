@@ -100,7 +100,7 @@ function renderizarCard (info) {
     wandLabel.textContent = 'Wand'
 
     const wandValor = document.createElement('p')
-    const wandEl = info.wand
+    const wandEl = info.wand || 'Unknown'
     wandValor.textContent = `${wandEl.wood || '?'} / ${wandEl.core || '?'} / ${`${wandEl.length}"` || '?'}`
 
     wandSection.append(wandLabel, wandValor)
@@ -117,4 +117,10 @@ function renderizarCard (info) {
 
     ancestrySection.append(ancestryLabel, ancestryValor)
     extraInfo.append(wandSection, ancestrySection)
+
+    card.append(imagem, nome, cardInfo, extraInfo)
+    cardContainer.appendChild(card)
+    
 }
+
+btnSearch.addEventListener('click', buscarPersonagem)
