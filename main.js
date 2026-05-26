@@ -3,6 +3,18 @@
 const searchInput = document.getElementById("search-input")
 const btnSearch = document.getElementById("btn-search")
 const cardContainer = document.getElementById("card-container")
+const btnRandom = document.getElementById("btn-random")
+
+let allCharacters = []
+
+async function buscarApi() {
+    if (allCharacters.length)
+        return allCharacters
+
+    const api = await fetch('https://hp-api.onrender.com/api/characters')
+    allCharacters = await api.json()
+    return allCharacters
+}
 
 async function buscarPersonagem() {
     const termoBusca = searchInput.value.trim()
@@ -11,12 +23,11 @@ async function buscarPersonagem() {
         return false
 
     try {
-        const api = await fetch('https://hp-api.onrender.com/api/characters')
-        const dados = await api.json()
+        const dados = await buscarApi()
 
         const personagem = dados.find(function(p) {
-            return p.name.toLowerCase()
-                .includes(termoBusca.toLowerCase())
+            return p.name.toUpperCase()
+                .includes(termoBusca.toUpperCase())
         })
 
         if (!personagem) {
@@ -47,30 +58,29 @@ function renderizarCard (info) {
     const campos = [
         {
             label: 'House',
-            valor: info.house
+            valor: info.house.toUpperCase()
         },
         {
             label: 'Specie',
-            valor: info.species
+            valor: info.species.toUpperCase()
         },
         {
             label: 'Status',
-            valor: info.alive ? 'Alive' : 'Dead'
+            valor: info.alive ? 'ALIVE' : 'DEAD'
         },
         {
             label: 'Gender',
-            valor: info.gender
+            valor: info.gender.toUpperCase()
         },
         {
             label: 'Patronus',
-            valor: info.patronus
+            valor: info.patronus.toUpperCase()
         },
         {
             label: 'Date Of Birth',
-            valor: info.dateOfBirth
+            valor: info.dateOfBirth.toUpperCase()
         },
     ]
-
     campos.forEach(function(campo) {
 
         const item = document.createElement('div')
@@ -101,7 +111,7 @@ function renderizarCard (info) {
 
     const wandValor = document.createElement('p')
     const wandEl = info.wand || 'Unknown'
-    wandValor.textContent = `${wandEl.wood || '?'} / ${wandEl.core || '?'} / ${`${wandEl.length}"` || '?'}`
+    wandValor.textContent = `${wandEl.wood.toUpperCase() || '?'} / ${wandEl.core.toUpperCase() || '?'} / ${`${wandEl.length}"` || '?'}`
 
     wandSection.append(wandLabel, wandValor)
 
@@ -113,7 +123,7 @@ function renderizarCard (info) {
     ancestryLabel.textContent = 'Ancestry'
 
     const ancestryValor = document.createElement('p')
-    ancestryValor.textContent = info.ancestry || 'Unknown'
+    ancestryValor.textContent = info.ancestry.toUpperCase() || 'Unknown'
 
     ancestrySection.append(ancestryLabel, ancestryValor)
     extraInfo.append(wandSection, ancestrySection)

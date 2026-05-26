@@ -188,7 +188,7 @@ main h1 {
 .card-info {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px 12px;
     margin-bottom: 28px;
 }
@@ -209,15 +209,16 @@ main h1 {
 .info-item p,
 .wand-section p {
     color: #ffffff;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 1.4;
 }
 
 .extra-info {
     width: 100%;
     display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
-    gap: 80px;
+    gap: 20px;
     margin-top: 10px;
 }
 
