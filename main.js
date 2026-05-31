@@ -1,5 +1,6 @@
 'use strict'
 
+//Chamar IDs dos elementos HTML
 const searchInput = document.getElementById("search-input")
 const btnSearch = document.getElementById("btn-search")
 const cardContainer = document.getElementById("card-container")
@@ -7,8 +8,10 @@ const btnRandom = document.getElementById("btn-random")
 const overlay = document.getElementById('overlay')
 const autocompleteList = document.getElementById('autocomplete-list')
 
+//Variável para armazenar os personagens buscados da API
 let allCharacters = []
 
+//Função para buscar os personagens da API
 async function buscarApi() {
     if (allCharacters.length)
         return allCharacters
@@ -18,6 +21,7 @@ async function buscarApi() {
     return allCharacters
 }
 
+//Função para buscar o personagem digitado no input
 async function buscarPersonagem() {
     const termoBusca = searchInput.value.trim()
 
@@ -33,15 +37,40 @@ async function buscarPersonagem() {
         })
 
         if (!personagem) {
-
+            renderizarErro(`Personagem não encontrado: “${termoBusca}”`)
+            return
         }
 
         renderizarCard(personagem)
     } catch (error) {
-
+        renderizarErro('Erro ao buscar o personagem. Tente novamente mais tarde.')
     }
 }
 
+//Função para renderizar uma mensagem de erro
+function renderizarErro(message) {
+    //Remove o card existente, se houver
+    if (cardContainer.firstChild) {
+        cardContainer.removeChild(cardContainer.firstChild)
+    }
+
+    const errorCard = document.createElement('div')
+    errorCard.classList.add('character-card', 'error-card')
+
+    const errorTitle = document.createElement('h2')
+    errorTitle.textContent = 'Ops!'
+
+    const errorMessage = document.createElement('p')
+    errorMessage.textContent = message
+    errorMessage.classList.add('error-message')
+
+    errorCard.append(errorTitle, errorMessage)
+    cardContainer.appendChild(errorCard)
+
+    overlay.classList.add('active')
+}
+
+//Função para renderizar o card do personagem
 function renderizarCard(info) {
     if (cardContainer.firstChild) {
         cardContainer.removeChild(cardContainer.firstChild)
@@ -49,13 +78,6 @@ function renderizarCard(info) {
 
     const card = document.createElement('div')
     card.classList.add('character-card')
-
-    const coresCasas = {
-        GRYFFINDOR: '',
-        SLYTHERIN: '#',
-        RAVENCLAW: '#',
-        HUFFLEPUFF: '#'
-    }
 
     const casa = info.house?.toLowerCase()
 
@@ -69,6 +91,12 @@ function renderizarCard(info) {
     imagem.src = info.image || 'Unknown'
     imagem.alt = info.name
     imagem.classList.add('character-image')
+
+    if (casa) {
+        imagem.classList.add(casa)
+    } else {
+        imagem.classList.add('default-house')
+    }
 
     const nome = document.createElement('h2')
     nome.textContent = info.name
@@ -111,6 +139,12 @@ function renderizarCard(info) {
         labelEl.classList.add('label')
         labelEl.textContent = campo.label
 
+        if (casa) {
+            labelEl.classList.add(casa)
+        } else {
+            labelEl.classList.add('default-house')
+        }
+
         const valorEl = document.createElement('p')
         valorEl.textContent = campo.valor || 'Unknown'
 
@@ -149,6 +183,14 @@ function renderizarCard(info) {
     ancestrySection.append(ancestryLabel, ancestryValor)
     extraInfo.append(wandSection, ancestrySection)
 
+    if (casa) {
+        wandLabel.classList.add(casa)
+        ancestryLabel.classList.add(casa)
+    } else {
+        wandLabel.classList.add('default-house')
+        ancestryLabel.classList.add('default-house')
+    }
+
     card.append(imagem, nome, cardInfo, extraInfo)
     cardContainer.appendChild(card)
 
@@ -158,7 +200,7 @@ function renderizarCard(info) {
 btnSearch.addEventListener('click', buscarPersonagem)
 
 // Escuta o clique no fundo desfocado (overlay)
-overlay.addEventListener('click', () => {
+overlay.addEventListener('click', function () {
     // Procura se existe um card com a classe '.character-card'
     const cardExistente = cardContainer.querySelector('.character-card')
 
@@ -170,9 +212,11 @@ overlay.addEventListener('click', () => {
     overlay.classList.remove('active')
 })
 
-btnRandom.addEventListener('click', async () => {
+//Botão para sortear um personagem aleatório
+btnRandom.addEventListener('click', async function () {
     const api = await buscarApi()
 
+    //Filtra os personagens que possuem imagem para evitar mostrar um card sem foto
     const personagensFiltrados = api.filter(personagem => personagem.image)
     const indiceAleatorio = Math.floor(Math.random() * personagensFiltrados.length)
 
@@ -181,12 +225,17 @@ btnRandom.addEventListener('click', async () => {
     renderizarCard(personagemAleatorio)
 })
 
+//Busca o personagem ao pressionar Enter no input de busca
 searchInput.addEventListener('keydown', function (enter) {
-    if (enter.key === 'Enter')
+    if (enter.key === 'Enter') {
         buscarPersonagem()
+        searchInput.value = ""
+        autocompleteList.replaceChildren()
+    }
 })
 
-searchInput.addEventListener('input', async () => {
+//Função para mostrar sugestões de personagens enquanto o usuário digita no input
+searchInput.addEventListener('input', async function () {
     autocompleteList.replaceChildren()
 
     const termo = searchInput.value.trim().toLowerCase()
@@ -195,21 +244,23 @@ searchInput.addEventListener('input', async () => {
 
     const personagens = await buscarApi()
 
+    //Filtra os personagens cujos nomes começam com o termo digitado, limitando a 5 resultados
     const resultados = personagens.filter(personagem =>
         personagem.name.toLowerCase().startsWith(termo)
     ).slice(0, 5)
 
-    resultados.forEach(personagem => {
+    resultados.forEach(function (personagem) {
         const item = document.createElement('div')
         item.classList.add('autocomplete-item')
         item.textContent = personagem.name
 
-        item.addEventListener('click', () => {
+        item.addEventListener('click', function () {
             searchInput.value = ""
             autocompleteList.replaceChildren()
             renderizarCard(personagem)
         })
 
+        //Adiciona o item de sugestão à lista de autocomplete
         autocompleteList.appendChild(item)
     })
 })

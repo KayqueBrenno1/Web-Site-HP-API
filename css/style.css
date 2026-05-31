@@ -66,11 +66,12 @@ main h1 {
 
 .search-box {
     display: flex;
+    width: 100%;
+    height: 55px;
     align-items: center;
     background: var(--bg-search);
     border: 1px solid var(--p-color-2);
     border-radius: 999px;
-    padding: 6px 8px 6px 20px;
     gap: 10px;
     transition: border-color 0.25s, box-shadow 0.25s;
 }
@@ -87,6 +88,7 @@ main h1 {
     outline: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
+    margin-left: 30px;
     color: var(--p-color-1);
 }
 
@@ -94,26 +96,20 @@ main h1 {
     color: var(--p-color-2);
 }
 
-.search-box {
-    position: relative;
-}
-
 #autocomplete-list {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    width: 100%;
-    background: rgba(5, 10, 25, 0.98);
+    width: 90%;
+    margin: 8px auto;
+    background-color: rgba(5, 10, 25, 0.98);
     border: 1px solid #8B6B20;
     border-radius: 12px;
     color: #8B6B20;
 }
 
 .autocomplete-item {
-    padding: 14px 18px;
+    padding: 10px 16px;
     cursor: pointer;
     transition: 0.2s;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .autocomplete-item:last-child {
@@ -125,10 +121,12 @@ main h1 {
 }
 
 .btn-search {
+    width: 90px;
+    height: 40px;
     background: var(--bg-button);
+    margin-right: 8px;
     border: none;
     border-radius: 999px;
-    padding: 12px 24px;
     font-family: var(--primary-font);
     font-size: 13px;
     font-weight: 700;
@@ -160,20 +158,21 @@ main h1 {
     display: flex;
     max-width: 600px;
     justify-content: center;
+    margin-top: 45px;
 }
 
 .btn-random {
+    width: 180px;
+    height: 40px;
     background: var(--bg-search);
     border: 1px solid var(--line-color);
     color: var(--p-color-1);
     border-radius: 999px;
-    padding: 12px 24px;
     font-family: var(--primary-font);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s;
-    margin-top: 20px;
 }
 
 .btn-random:hover {
@@ -190,22 +189,27 @@ main {
 /* Fundo desfocado que cobre a tela inteira */
 #overlay {
     position: fixed;
-    inset: 0; /* Faz ocupar toda a largura e altura */
+    inset: 0;
+    /* Faz ocupar toda a largura e altura */
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;  /* Overlay começa invisível */
-    visibility: hidden; /* Esconde completamente o elemento */
+    opacity: 0;
+    /* Overlay começa invisível */
+    visibility: hidden;
+    /* Esconde completamente o elemento */
     transition: 0.3s;
 
     z-index: 5;
 }
 
 #overlay.active {
-    opacity: 1; /* Deixa visível */
-    visibility: visible; /* Permite aparecer na tela */
+    opacity: 1;
+    /* Deixa visível */
+    visibility: visible;
+    /* Permite aparecer na tela */
 }
 
 #card-container {
@@ -214,7 +218,7 @@ main {
 
 .character-card {
     width: 410px;
-    background: rgba(5, 10, 25, 0.95);
+    background-color: rgba(5, 10, 25, 0.95);
     padding: 40px 30px 60px;
     display: flex;
     flex-direction: column;
@@ -224,28 +228,28 @@ main {
 
 .character-card.gryffindor {
     border: 1px solid #740001;
-    box-shadow: 
+    box-shadow:
         0 0 20px #740001,
         0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .character-card.slytherin {
     border: 1px solid #1A472A;
-    box-shadow: 
+    box-shadow:
         0 0 20px #1A472A,
         0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .character-card.ravenclaw {
     border: 1px solid #0E1A40;
-    box-shadow: 
+    box-shadow:
         0 0 20px #0E1A40,
         0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .character-card.hufflepuff {
     border: 1px solid #d4a325;
-    box-shadow: 
+    box-shadow:
         0 0 20px #d4a325,
         0 0 40px rgba(0, 0, 0, 0.6);
 }
@@ -257,13 +261,46 @@ main {
         0 0 8px rgba(212, 161, 42, 0.15);
 }
 
+.error-card {
+    border: 1px solid var(--p-color-2);
+    box-shadow:
+        0 0 18px var(--p-color-2),
+        0 0 30px rgba(179, 58, 58, 0.25);
+}
+
+.error-message {
+    color: var(--h1-color);
+    text-align: center;
+    line-height: 1.6;
+    max-width: 320px;
+}
+
 .character-image {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #D4A12A;
     margin-bottom: 30px;
+}
+
+.character-image.gryffindor {
+    border: 3px solid #740001;
+    box-shadow: 0 0 10px #740001;
+}
+
+.character-image.slytherin {
+    border: 3px solid #1A472A;
+    box-shadow: 0 0 10px #1A472A;
+}
+
+.character-image.ravenclaw {
+    border: 3px solid #0E1A40;
+    box-shadow: 0 0 10px #0E1A40;
+}
+
+.character-image.hufflepuff {
+    border: 3px solid #d4a325;
+    box-shadow: 0 0 10px #d4a325;
 }
 
 .character-card h2 {
@@ -273,6 +310,30 @@ main {
     text-transform: uppercase;
     margin-bottom: 32px;
     text-align: center;
+}
+
+.character-card.gryffindor h2 {
+    color: #740001;
+}
+
+.character-card.slytherin h2 {
+    color: #1A472A;
+}
+
+.character-card.ravenclaw h2 {
+    color: #4F7FFF;
+}
+
+.character-card.slytherin h2 {
+    color: #1A472A;
+}
+
+.character-card.hufflepuff h2 {
+    color: #d4a325;
+}
+
+.character-card.default-house h2 {
+    color: rgb(128, 122, 122);
 }
 
 .card-info {
@@ -289,11 +350,35 @@ main {
 
 .label {
     display: block;
-    color: var(--h1-color);
     font-family: var(--primary-font);
     font-size: 11px;
     text-transform: uppercase;
     margin-bottom: 6px;
+}
+
+.label.gryffindor {
+    color: #740001;
+    font-weight: 800;
+}
+
+.label.slytherin {
+    color: #1A472A;
+    font-weight: 800;
+}
+
+.label.ravenclaw {
+    color: #4F7FFF;
+    font-weight: 800;
+}
+
+.label.hufflepuff {
+    color: #d4a325;
+    font-weight: 800;
+}
+
+.label.default-house {
+    color: rgb(128, 122, 122);
+    font-weight: bold;
 }
 
 .info-item p,
@@ -315,4 +400,123 @@ main {
 .extra-info .info-item,
 .extra-info .wand-section {
     text-align: center;
+}
+
+@media (min-width: 768px) {
+    header h1 {
+        padding: 15px 35px;
+        font-size: 30px;
+    }
+
+    .hero-content h1{
+        width: 90%;
+        margin: 0 auto;
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .hero-content {
+        margin-top: 60px;
+    }
+
+    main h1 {
+        font-weight: 600;
+    }
+
+    .description {
+        width: 70%;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+        margin: 0 auto;
+        line-height: normal;
+        margin-bottom: 30px;
+    }
+
+    .search-box {
+        width: 80%;
+        height: 35px;
+        margin: 0 auto;
+    }
+
+    #autocomplete-list {
+        width: 70%;
+    }
+
+    .autocomplete-item {
+        padding: 8px 12px;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .search-input {
+        font-size: 9px;
+        margin-left: 20px;
+    }
+
+    .btn-search {
+        width: 50px;
+        height: 20px;
+        font-size: 7px;
+    }
+
+    .container-btn-random {
+        margin-top: 25px;
+    }
+
+    .btn-random {
+        width: 130px;
+        height: 30px;
+        font-size: 8px;
+        margin-top: 0;
+    }
+
+    .character-card {
+        width: 280px;
+        padding: 30px 20px 40px;
+    }
+
+    .error-card {
+        font-size: 14px;
+    }
+
+    .character-image {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 20px;
+    }
+
+    .character-card h2 {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .card-info {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .label {
+        font-size: 9px;
+    }
+
+    .info-item p,
+    .wand-section p {
+        font-size: 8px;
+    }
+
+    .extra-info {
+        margin-top: 0;
+        gap: 12px;
+    }
+
+    .dados p {
+        font-size: 10px;
+    }
 }
