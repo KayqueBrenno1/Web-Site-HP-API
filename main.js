@@ -228,7 +228,11 @@ btnRandom.addEventListener('click', async function () {
 //Busca o personagem ao pressionar Enter no input de busca
 searchInput.addEventListener('keydown', function (enter) {
     if (enter.key === 'Enter') {
+        //Previne o comportamento padrão do Enter, que é enviar um formulário ou adicionar uma nova linha
+        enter.preventDefault()
         buscarPersonagem()
+        //Fecha o teclado virtual em dispositivos móveis e limpa o input de busca
+        searchInput.blur()
         searchInput.value = ""
         autocompleteList.replaceChildren()
     }

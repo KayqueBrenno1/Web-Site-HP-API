@@ -36,6 +36,7 @@ footer {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    /* Adiciona a imagem de fundo com um gradiente para escurecer a imagem */
     background-image: linear-gradient(rgba(8, 13, 26, 0.70), rgba(8, 13, 26, 0.70)),
         url('../img/Dementadores-Harry-Potter-Curiosidades.jpg');
     background-size: cover;
